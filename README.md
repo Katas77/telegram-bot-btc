@@ -28,7 +28,7 @@
 
 ## Prerequisites
 - Java 17
-- Maven (for building the application)
+- Gradle (for building the application)
 - Spring Boot 3.2.3
 - Docker 
 

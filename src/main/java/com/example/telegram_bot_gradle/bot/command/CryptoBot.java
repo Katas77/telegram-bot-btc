@@ -1,4 +1,4 @@
-package com.example.telegram_bot_gradle.bot;
+package com.example.telegram_bot_gradle.bot.command;
 
 
 import com.example.telegram_bot_gradle.database.service.UserAppService;
