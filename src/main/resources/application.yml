@@ -1,0 +1,21 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://root:root@localhost:27017/appdatabase?authSource=admin
+telegram:
+  bot:
+    username: Roma1977_Bot
+    token: 7601741862:AAFcSb579Ev_8Wd6gtoqN06p_4xMGqPM2Xs
+
+    #
+#    используйте переменные среды для установки значений
+
+    notify:
+      delay:
+        value: 10
+        unit: MINUTES
+
+binance:
+  api:
+    getPrice: https://api.binance.com/api/v3/avgPrice?symbol=BTCUSDT
+
