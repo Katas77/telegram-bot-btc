@@ -2,13 +2,14 @@ spring:
   data:
     mongodb:
       uri: mongodb://root:root@localhost:27017/appdatabase?authSource=admin
+      #
+      #    используйте переменные среды для установки значений
+
 telegram:
   bot:
-    username: Roma1977_Bot
-    token: 7601741862:AAFcSb579Ev_8Wd6gtoqN06p_4xMGqPM2Xs
+    username: ${BOT_NAME}
+    token: ${BOT_TOKEN}
 
-    #
-#    используйте переменные среды для установки значений
 
     notify:
       delay:
