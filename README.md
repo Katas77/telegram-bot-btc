@@ -23,8 +23,11 @@
 - Create a new subscription.
 - Displaying information about an existing subscription.
 - Delete an active subscription.
-- Cost tracking mechanism. a user with a subscription whose desired price is higher than the current one.
-  The bot will send a notification: “It’s time to buy”
+- Every two minutes bot request the current transaction value in US dollars.
+  The bot looking for users with subscriptions whose desired price is higher than the current one.
+  The bot will send to the found users a notification: “It’s time to buy”
+
+ 
 
 ## Prerequisites
 - Java 17
