@@ -1,6 +1,5 @@
 package com.example.telegram_bot_gradle.configuration;
 
-
 import com.example.telegram_bot_gradle.bot.command.CryptoBot;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;

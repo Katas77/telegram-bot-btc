@@ -1,6 +1,5 @@
 package com.example.telegram_bot_gradle.bot.command;
 
-
 import com.example.telegram_bot_gradle.database.service.UserAppService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

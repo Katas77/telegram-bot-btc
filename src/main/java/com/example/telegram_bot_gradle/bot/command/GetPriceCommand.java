@@ -1,7 +1,5 @@
 package com.example.telegram_bot_gradle.bot.command;
 
-
-
 import com.example.telegram_bot_gradle.service.CryptoCurrencyService;
 import com.example.telegram_bot_gradle.utils.TextUtil;
 import lombok.AllArgsConstructor;

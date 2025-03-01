@@ -1,6 +1,5 @@
 package com.example.telegram_bot_gradle.bot.command;
 
-
 import com.example.telegram_bot_gradle.database.service.UserAppService;
 import com.example.telegram_bot_gradle.database.userModel.UserApp;
 import lombok.AllArgsConstructor;
@@ -13,7 +12,6 @@ import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
 
 /**
  * Обработка команды начала работы с ботом

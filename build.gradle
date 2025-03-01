@@ -32,8 +32,10 @@ dependencies {
 	implementation "org.telegram:telegrambots:$telegrambotsVersion"
 	implementation "org.telegram:telegrambotsextensions:$telegrambotsVersion"
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }

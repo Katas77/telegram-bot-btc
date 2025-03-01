@@ -7,13 +7,9 @@ import jakarta.annotation.PostConstruct;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
 import java.io.IOException;
-import java.text.MessageFormat;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -25,67 +21,86 @@ import java.util.concurrent.TimeUnit;
 public class UserAppService {
 
     private final UserAppRepository repository;
+    private final CryptoCurrencyService service;
     private Double bitCoinPrice;
 
-    private final CryptoCurrencyService service;
+    public UserAppService(UserAppRepository repository, CryptoCurrencyService service) {
+        this.repository = repository;
+        this.service = service;
+    }
 
     @PostConstruct
-    private void print() {
-        this.findAll().forEach(System.out::println);
+    private void init() {
+        logUsers();
+        scheduleBitcoinPriceUpdates();
+    }
+
+    private void logUsers() {
+        findAll().forEach(userApp -> log.info("Registered UserApp: {}", userApp));
     }
 
     public List<UserApp> findAll() {
         return repository.findAll();
-
     }
 
     public void save(UserApp userApp) {
-        if (findAll().stream().noneMatch(userApp1 -> Objects.equals(userApp1.getChatId(), userApp.getChatId()))) {
-            String id = userApp.getId() + UUID.randomUUID().toString().substring(0, 4);
+        if (isUserNotRegistered(userApp)) {
+            String id = createUniqueId(userApp);
             userApp.setId(id);
-            log.info(MessageFormat.format("userApp with ID {0} registered", userApp.getChatId()));
+            log.info("UserApp with ID {} registered", userApp.getChatId());
             repository.save(userApp);
-        } else log.info("This userApp  is already registered");
+        } else {
+            log.info("This UserApp is already registered");
+        }
+    }
+
+    private boolean isUserNotRegistered(UserApp userApp) {
+        return findAll().stream()
+                .noneMatch(existingUser -> Objects.equals(existingUser.getChatId(), userApp.getChatId()));
+    }
+
+    private String createUniqueId(UserApp userApp) {
+        return userApp.getId() + UUID.randomUUID().toString().substring(0, 4);
     }
 
     public void update(UserApp userApp) {
-        Optional<UserApp> optional = repository.findAll().stream().filter(user -> Objects.equals(user.getChatId(), userApp.getChatId())).findFirst();
-        UserApp userAppUpdate = optional.orElseThrow();
-        userAppUpdate.setBitCoinPrice(userApp.getBitCoinPrice());
-        repository.save(userAppUpdate);
+        UserApp existingUserApp = findUserByChatId(userApp.getChatId());
+        existingUserApp.setBitCoinPrice(userApp.getBitCoinPrice());
+        repository.save(existingUserApp);
     }
 
-    public String GetSubscription(Long chatId) {
-        Optional<UserApp> optional = repository.findAll().stream().filter(user -> Objects.equals(user.getChatId(), chatId)).findFirst();
-        var text = " Вы подписались  на стоимость bitcoin %s USD.";
-        return optional.orElseThrow().getBitCoinPrice() == null ? "Активные подписки отсутствуют" : String.format(text, optional.get().getBitCoinPrice());
+    public String getSubscription(Long chatId) {
+        UserApp userApp = findUserByChatId(chatId);
+        Double price = userApp.getBitCoinPrice();
+        return
+                price == null ? "Активные подписки отсутствуют" :
+                String.format("Вы подписались на стоимость Bitcoin: %s USD.", price);
     }
 
     public void reset(Long chatId) {
-        Optional<UserApp> optional = repository.findAll().stream().filter(userApp1 -> Objects.equals(userApp1.getChatId(), chatId)).findFirst();
-        UserApp userAppUpdate = optional.orElseThrow();
-        userAppUpdate.setBitCoinPrice(null);
-        repository.save(userAppUpdate);
+        UserApp userApp = findUserByChatId(chatId);
+        userApp.setBitCoinPrice(null);
+        repository.save(userApp);
     }
 
-    @PostConstruct
-    public void setDate() {
+    private UserApp findUserByChatId(Long chatId) {
+        return findAll().stream()
+                .filter(user -> Objects.equals(user.getChatId(), chatId))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    private void scheduleBitcoinPriceUpdates() {
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-        scheduler.scheduleAtFixedRate(() -> {
-            try {
-                this.setBitCoinPrice(service.getBitcoinPrice());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }, 0, 2, TimeUnit.MINUTES);
+        scheduler.scheduleAtFixedRate(this::updateBitcoinPrice, 0, 2, TimeUnit.MINUTES);
     }
 
-
-    private void command(Long chatId) {
-        String formattedText;
-        var text = "Date %s now.";
-        formattedText = String.format(text, LocalDate.now());
-
+    private void updateBitcoinPrice() {
+        try {
+            setBitCoinPrice(service.getBitcoinPrice());
+        } catch (IOException e) {
+            log.error("Ошибка получения цены биткоина", e);
+        }
     }
 
 }

@@ -1,6 +1,5 @@
 package com.example.telegram_bot_gradle.bot.command;
 
-
 import com.example.telegram_bot_gradle.database.service.UserAppService;
 import com.example.telegram_bot_gradle.database.userModel.UserApp;
 import com.example.telegram_bot_gradle.service.CryptoCurrencyService;
@@ -13,7 +12,6 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
 import java.io.IOException;
 
 
@@ -55,7 +53,6 @@ public class SubscribeCommand implements IBotCommand {
         } else {
             sendMessage(absSender, message, "Введите команду  в формате /subscribe желаемая стоимости биткоина.  Пример /subscribe 35500");
         }
-
     }
 
     private void sendMessage(AbsSender absSender, Message message, String text) {

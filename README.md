@@ -1,90 +1,61 @@
 
-<h2 align="center">
+![image](./image/2.jpg)
 
-![image](./image/2.jpg )
+# 📱 Telegram Bot на Java 💰
 
-</h2>
+## Обзор
 
-<center><font size="6" face="Georgia"> <h3> Telegram Bot Java 
-</h3></font>
-</center>
+- Этот телеграм-бот отслеживает цены на активы и уведомляет пользователя, когда их стоимость достигает желаемого уровня.
+- Таким образом, инвесторы смогут быстро реагировать на изменения и принимать решения на основе актуальной информации.
+____
 
+## Возможности
 
+- 📈 Получение значения Bitcoin.
+- 📬 Создание новой подписки.
+- 📋 Отображение информации о существующей подписке.
+- ❌ Удаление активной подписки.
+- ⏰ Каждые две минуты бот запрашивает текущее значение транзакции в долларах США.
+  - Бот ищет пользователей с подписками, у которых желаемая цена выше текущей.
+  - Найденным пользователям будет отправлено уведомление: “Время покупать”.
+____
+## Требования
+- **Java 17**
+- **Gradle** (для сборки приложения)
+- **Spring Boot 3.2.3**
+- **Docker Desktop**
 
-## Overview:
-
-- This telegram bot monitors the price of an asset and notifies the user that its value has reached the desired level. 
-- This way, investors will be able to quickly respond to changes and make decisions based on up-to-date information.
-
-
-
-## Features:
-- Getting Bitcoin Value.
-- Create a new subscription.
-- Displaying information about an existing subscription.
-- Delete an active subscription.
-- Every two minutes bot request the current transaction value in US dollars.
-  The bot looking for users with subscriptions whose desired price is higher than the current one.
-  The bot will send to the found users a notification: “It’s time to buy”
-
- 
-
-## Prerequisites
-- Java 17
-- Gradle (for building the application)
-- Spring Boot 3.2.3
-- Docker 
-
-## Setup and Installation
-- Clone the repository:
-- Git clone <a href="">https://github.com/Katas77</a>
-- You will need BotFather to register a new bot in Telegram: <a href="">https://t.me/BotFather</a>
-- We execute the command /newbot and enter the name of the future bot, after which BotFather will generate a unique token, which will then be required to organize the interaction of the application with the created Telegram bot.
-- Enter the received data to application.yml
-- Build the application using Maven:
-- Mvn clean install
-- Run the application:
-- For general use:
-- - Work with data-mongodb
-- - Launch and configure the database via Docker
-- - To run using Docker, you need to enter the following commands in the terminal:
-- - cd docker
-- - docker-compose up
-
-
-
-
-##  Management
-
-This app are managed through a simple command-line interface.
-Input errors are handled gracefully, with prompts for correct input.
-
-## Technologies used:
-- Java
-- Spring Boot
-- Docker
-- Mongodb
-- Telegrambots
+---
+## Установка и настройка:
+- Клонируйте репозиторий: git clone https://github.com/Katas77
+- Перейдите в директорию проекта:
+- Соберите приложение с помощью Gradle
+### Docker
+Для запуска проекта необходимо установить и запустить Docker. Для работы с базой данных (Mongodb) нужно запустить соответствующий контейнер.
+- Необходимо указать Ваши параметры подключения ( username: ******  password:****** ) в **application.yaml**
+- Необходимо выполните следующие команды:
+```bash
+cd docker
+```
+```bash
+docker-compose up
+```
+## Обратная связь:
+____
+✉ Почта для обратной связи:
+<a href="">krp77@mail.ru</a>
 
 ## Database:
-
 - Mongodb
-
-
 
 
 ![image](./image/3.jpg )
-
-
 
 ____
 ✉ Почта для обратной связи:
 <a href="">krp77@mail.ru</a>
 
 
-<h2 align="center">
+![image](./image/4.png )
 
-![image](./image/1.png )
-
-</h2>
 

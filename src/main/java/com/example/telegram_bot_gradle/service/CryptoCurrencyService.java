@@ -1,7 +1,5 @@
 package com.example.telegram_bot_gradle.service;
 
-
-
 import com.example.telegram_bot_gradle.client.BinanceClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

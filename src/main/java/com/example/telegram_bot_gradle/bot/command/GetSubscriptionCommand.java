@@ -1,6 +1,5 @@
 package com.example.telegram_bot_gradle.bot.command;
 
-
 import com.example.telegram_bot_gradle.database.service.UserAppService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +30,7 @@ public class GetSubscriptionCommand implements IBotCommand {
     public void processMessage(AbsSender absSender, Message message, String[] arguments) {
         SendMessage answer = new SendMessage();
         answer.setChatId(message.getChatId());
-        answer.setText(userAppService.GetSubscription(message.getChatId()));
+        answer.setText(userAppService.getSubscription(message.getChatId()));
         try {
             absSender.execute(answer);
         } catch (TelegramApiException e) {
